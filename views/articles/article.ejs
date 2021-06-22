@@ -1,0 +1,56 @@
+<!-- 게시글  -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <%-include('../partial/bootstrapCDN')%>
+    <link rel='stylesheet' href='/css/style.css' />
+    <title>Bonghun's Blog</title>
+  </head>
+  <body>
+
+
+    <% if (isLogin)  { %>
+      <%-include('../partial/header_logout')%>
+      <%} else { %>
+        <%-include('../partial/header_login')%>
+      <% } %>
+
+    <div class = "mx-auto" style = "padding-bottom: 150px; padding-top: 40px;">
+    <div class= 'p-3'><h1><%= article.title %></h1></div>
+       <div class = "pl-3 pr-3 text-muted"><%= article.create_at.toLocaleDateString() %></div>
+       <hr>
+        <div class ='p-3'><%- article.contents %></div>
+
+        <div style="text-align: right;">    
+        <a href="/" class ='btn btn-secondary'>홈으로</a>
+        <% if (isAdmin) { %>
+          <form action="/articles/edit/<%= article.id %>?_method=PUT"  method="POST" class = 'd-inline'>
+            <button type ="submit" class="btn btn-primary">수정</button>
+          </form>
+  
+          <form action="/articles/<%= article.id %>?_method=DELETE"  method="POST" class = 'd-inline'>
+              <button type ="submit" class="btn btn-danger">삭제</button>
+          </form>
+          <!-- 댓글 (disquss) -->
+        <% } %>
+        <div id="disqus_thread"></div>
+        </div>
+</div>
+    
+        <%-include('../partial/footer')%>
+        
+
+<script>
+    (function() { 
+    var d = document, s = d.createElement('script');
+    s.src = 'https://bongbong-1.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<script id="dsq-count-scr" src="//bongbong-1.disqus.com/count.js" async></script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+      </body>
+    </html>

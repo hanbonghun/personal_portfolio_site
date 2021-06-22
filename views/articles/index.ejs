@@ -1,0 +1,87 @@
+
+<!-- 홈화면 -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <%-include('../partial/bootstrapCDN')%>
+    <link rel='stylesheet' href='/css/style.css' />
+    <title>Bonghun's Blog</title>
+  </head>
+  <body>
+    
+
+    <% if(isLogin&&isAdmin){ %>
+      <%-include('../partial/header_logout_admin')%>
+
+   <% } %>
+
+   <% if(isLogin&&!isAdmin){ %>
+    <%-include('../partial/header_logout')%>
+
+ <% } %>
+
+ <% if(!isLogin){ %>
+  <%-include('../partial/header_login')%>
+
+<% } %>
+  
+     
+      <div class="p-0 pb-5 mb-5 jumbotron jumbotron-fluid" style = "margin:0px;">
+        <div class = "pr-5" style = "text-align: right;">
+          <img style = "padding :0px; "src="http://openweathermap.org/img/wn/<%= weather.icon %>@2x.png" alt="">
+          <%= weather.temp %>°C
+          <%= weather.humidity %>%
+          <p style = "margin-top:-30px;"><%= weather.name %></p>
+        </div>
+        <div class="container">
+          <h1 class="display-4">Hello, World!</h1>
+          <p class="lead">한봉훈 블로그</p>
+        </div>
+      </div>
+
+    <article>
+      <div class="box">
+        <div class="container">
+          <div class="row mb-5" >
+
+            <!-- 홈 화면에서 최대 6개 글 출력  -->
+      <% for(var i =0; i<6; i++) { %>
+        <%if (i===articles.length ) { %>
+          <% break %>
+          <% } %>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 equal">
+               
+					<div class="box-part text-center" style =  " width : 100%; position: relative;">
+             
+            <div>
+              <div class="title">
+                <h4><%= articles[i].title %></h4>
+              </div>
+  
+              <div class="text-muted">
+                <h7><%= articles[i].create_at.toLocaleDateString() %></h7>
+              </div>
+            </div>
+						
+                        
+						<div class="text">
+							<p><%= articles[i].description %></p>
+						</div>
+      
+         <div><a style ="bottom:10px; " href = "articles/<%= articles[i].id %>">more</a></div>
+           
+              </div>
+				</div>	 
+
+
+
+     <% } 
+     %> 
+      </div>
+      </div>
+      </div>
+    </article>
+    <hr>
+    <%-include('../partial/footer')%>
+  </body>
+</html>

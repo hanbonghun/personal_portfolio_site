@@ -1,0 +1,28 @@
+<!-- 게시글 작성 화면  -->
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <%-include('../partial/bootstrapCDN')%>
+    <%-include('../partial/summernote')%>
+     <link rel='stylesheet' href='/css/style.css' />
+    <title>Blog</title>
+  </head>
+  <body>
+    <% if (isLogin)  { %>
+      <%-include('../partial/header_logout')%>
+      <%} else { %>
+        <%-include('../partial/header_login')%>
+      <% } %>
+
+    <div class = "mx-auto" style = "padding-bottom: 150px; padding-top: 40px;">
+      <h2> 새 글 </h2>
+      <form action="/articles" method = "POST">
+        <%-include('../partial/write_form')%>
+      </form>
+    </div>
+    </div>
+
+    <%-include('../partial/footer')%>
+  </body>
+</html>

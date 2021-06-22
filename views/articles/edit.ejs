@@ -1,0 +1,59 @@
+<!-- 게시글 작성 화면  -->
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <%-include('../partial/bootstrapCDN')%>
+
+    <%-include('../partial/summernote')%>
+    
+
+    <title>Blog</title>
+  </head>
+  <body>
+    <% if (isLogin)  { %>
+      <%-include('../partial/header_logout')%>
+      <%} else { %>
+        <%-include('../partial/header_login')%>
+      <% } %>
+
+    <div style = "padding-left: 200px; padding-right: 200px; padding-bottom: 150px; padding-top: 10px;">
+      <h2> 게시글 편집 </h2>
+      <form action="/articles/<%= article.id %>?_method=PUT" method = "POST">
+          
+    <h4>제목</h4>
+    <input required type="text" value = '<%= article.title %>'' placeholder = "제목은 반드시 입력해야 합니다." name = "title" class='form-control'><br>
+    <h4>설명</h4>
+    <textarea  name="description" class = 'form-control'><%= article.description %></textarea><br>
+    <h4>본문</h4>
+
+    <textarea id="summernote" name= "contents"><%= article.contents %></textarea>
+
+    <script>
+      $('#summernote').summernote({
+        placeholder: 'Hello stand alone ui',
+        tabsize: 2,
+        height: 120,
+        toolbar: [
+          ['style', ['style']],
+          ['font', ['bold', 'underline', 'clear']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['table', ['table']],
+          ['insert', ['link', 'picture', 'video']],
+          ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+      });
+    </script>
+    <br>
+    <div style="text-align: right;">
+    <a href="/" class ="btn btn-secondary">취소</a>
+    <button type = "submit" class="btn btn-primary">저장</button>
+  </div>
+        </form>
+    </div>
+
+
+    <%-include('../partial/footer')%>
+  </body>
+</html>

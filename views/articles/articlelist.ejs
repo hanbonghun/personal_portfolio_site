@@ -1,0 +1,57 @@
+<!-- 게시글  -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <%-include('../partial/bootstrapCDN')%>
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Bonghun's Blog</title>
+  </head>
+  <body>
+    <% if (isLogin)  { %>
+      <%-include('../partial/header_logout')%>
+      <%} else { %>
+        <%-include('../partial/header_login')%>
+      <% } %>
+
+      <div class="container ">
+        <div class="col-md-12 articles" style = "padding-top: 50px; padding-bottom : 50px;width:100%">
+          <% for(var i = 0; i < results.limit; i++){ %>
+            <% if (!results.result[i]) {%>
+              <% break %>
+            <%}
+            %>
+            <div style= "width:100%">
+              <h4><%= results.result[i].title %></h4>
+              <p><%= results.result[i].description %></p> 
+              <a href="articles/<%=results.result[i].id%>">more</a>   
+              <hr> 
+            </div>
+  
+           <% } %>
+           </div>
+          </div>
+        
+
+        <nav class = "d-flex justify-content-center"aria-label="Page navigation example" style="margin-bottom: 20px;">
+          <ul class="pagination">
+            <% if (results.prev) { %> 
+              <li class="page-item">
+              <a class="page-link" href="articles?page=<%= results.prev.page %>&limit=<%= results.limit %>">Previous</a>
+            </li> <% } %>
+            <% for(var i = 1; i <= results.total_page; i++){ %>
+              <li class="page-item"><a class="page-link" href="/articles?page=<%= i %>&limit=<%= results.limit %>"><%= i %></a></li>
+             <% } %>
+             <% if (results.next) { %> <li class="page-item">
+              <a class="page-link" href="articles?page=<%= results.next.page %>&limit=<%= results.limit %>">Next</a>
+            </li> <% } %>
+
+             
+          </ul>
+        </nav>
+
+
+        <br><br>
+
+        <%-include('../partial/footer')%>
+      </body>
+    </html>

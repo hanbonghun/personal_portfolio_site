@@ -1,0 +1,30 @@
+  
+    <h4>제목</h4>
+    <input required type="text" placeholder = "제목은 반드시 입력해야 합니다." name = "title" class='form-control'><br>
+    <h4>설명</h4>
+    <textarea  name="description" class = 'form-control'></textarea><br>
+    <h4>본문</h4>
+
+    <textarea id="summernote" name= "contents"></textarea>
+
+    <script>
+      $('#summernote').summernote({
+        placeholder: 'Hello stand alone ui',
+        tabsize: 2,
+        height: 120,
+        toolbar: [
+          ['style', ['style']],
+          ['font', ['bold', 'underline', 'clear']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['table', ['table']],
+          ['insert', ['link', 'picture', 'video']],
+          ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+      });
+    </script>
+    <br>
+    <div style="text-align: right;">
+    <a href="/" class ="btn btn-secondary">취소</a>
+    <button type = "submit" class="btn btn-primary">저장</button>
+  </div>
