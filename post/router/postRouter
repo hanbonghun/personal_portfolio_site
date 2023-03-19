@@ -4,11 +4,10 @@ const postService = require("../service/postService");
 const authMiddleware = require("../../middlewares/auth");
 
 // 홈 화면
-router.get("/", async (res,req)=>{
-    const postlist = await postService.showPostList; 
+router.get("/", async (req,res)=>{
+    const postlist = await postService.showPostList(); 
     res.render("post/postlist", { postlist: postlist });
 });
-
 // // 글쓰기 화면
 // router.get("/new", authMiddleware, postService.getNewArticle);
 

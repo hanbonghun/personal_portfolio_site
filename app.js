@@ -5,6 +5,24 @@ const memberRouter = require("./member/router/memberRouter");
 require('dotenv').config() //env 파일의 환경 변수를 읽어오기 위한 모듈 
 const mongoose = require("mongoose");
 
+// request body 파싱을 위한 미들웨어 
+const bodyParser = require('body-parser');
+// JSON 형태의 요청 데이터를 파싱하는 미들웨어
+app.use(bodyParser.json());
+
+// URL 인코딩된 요청 데이터를 파싱하는 미들웨어
+app.use(bodyParser.urlencoded({ extended: false }));
+
+//passport 
+const passport = require('passport');
+const session = require('express-session');
+app.use(session({
+    secret: 'your_secret_key',
+    resave: false,
+    saveUninitialized: false
+  }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 //템플릿 엔진 ejs 사용 
 app.set("view engine", "ejs"); 
@@ -29,3 +47,8 @@ mongoose
   })
   .then(() => console.log("MongoDB connected..."))
   .catch((error) => console.log(error));
+
+
+app.get('/', (req,res)=>{
+    res.render('index');
+})

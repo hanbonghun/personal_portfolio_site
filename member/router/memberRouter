@@ -1,20 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const { parseJSON, parseURLEncoded } = require('../middleware/body-parser');
 const memberService = require('../service/memberService');
 
 
-// body-parser middleware 등록
-router.use(parseJSON);
-router.use(parseURLEncoded);
-
-
+// GET /signup  : 회원 가입 페이지 
 router.get("/signup", (req, res) => {
     res.render("member/signup");
   });
 
-// POST /signup  : 회원가입 기능 
-
+// POST /signup  : 회원 가입 요청  
 router.post('/signup', async (req, res, next) => {
   try {
     console.log(req.body);
@@ -25,4 +19,15 @@ router.post('/signup', async (req, res, next) => {
   }
 });
 
-module.exports = router;
+// member/router/memberRouter
+// GET /login : 로그인 화면
+router.get('/login', (req, res) => {
+    res.render('member/login');
+  });
+  
+
+// POST /login: 로그인 요청 처리 
+router.post('/login', (req,res)=> memberService.login(req,res)); 
+  
+
+  module.exports = router;

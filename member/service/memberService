@@ -1,4 +1,7 @@
+// member/service/memberService.js
 var Member = require("../model/Member");
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 
 const createMember = async (memberData) => {
   const { name, email, password } = memberData;
@@ -6,6 +9,50 @@ const createMember = async (memberData) => {
   await member.save();
   return member;
 };
+
+passport.use(new LocalStrategy({
+  usernameField: 'email',
+  passwordField: 'password'
+}, async (email, password,done,next) => {
+  try {
+    const user = await Member.getMemberByEmail(email);
+    if (!user) {
+      console.log("wrong id")
+      return done(null, false);
+    }
+    const isMatched = await user.comparePassword(password);
+    if (!isMatched) {
+      console.log("wrong password")
+      return done(null, false);
+    }
+    return done(null, user);  // serializeUser 함수로 user 정보를 넘김
+  } catch (err) {
+     done(err);
+  }
+}));
+
+  passport.serializeUser((user, done) => {
+    done(null, user.id);  //db에서 추출한id값을 session id로 저장 
+  });
+  
+  passport.deserializeUser(async (id, done) => {
+    try {
+      const user = await Member.getMemberById(id);
+      return done(null, user);
+    } catch (err) {
+      return done(err);
+    }
+  });
+  
+  const login = passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/member/login',
+    failureFlash: true
+  });
+
+//db를 조회한 결과를 바탕으로 처리하므로 비동기 처리
+
 module.exports = {
-    createMember
-  };
+  createMember,
+  login 
+};
