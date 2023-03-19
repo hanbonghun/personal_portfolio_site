@@ -6,4 +6,4 @@ const showPostList = async function (req,res){
     return postlist; 
 }
 
-module.exports = {showArticleList};
+module.exports = {showPostList};

@@ -1,6 +1,13 @@
 const express = require('express');
 const router = express.Router();
+const { parseJSON, parseURLEncoded } = require('../middleware/body-parser');
 const memberService = require('../service/memberService');
+
+
+// body-parser middleware 등록
+router.use(parseJSON);
+router.use(parseURLEncoded);
+
 
 router.get("/signup", (req, res) => {
     res.render("member/signup");
@@ -10,6 +17,7 @@ router.get("/signup", (req, res) => {
 
 router.post('/signup', async (req, res, next) => {
   try {
+    console.log(req.body);
     const result = await memberService.createMember(req.body);
     res.status(200).json({ message: 'Success' });
   } catch (err) {
