@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>새 글 쓰기</title>
+  <link rel="stylesheet" href="/stylesheets/new.css">
+</head>
+<body>
+  <header>
+    <h1>새 글 쓰기</h1>
+  </header>
+
+  <main>
+    <form method="POST" action="/post/new">
+      <label for="title">제목</label>
+      <input type="text" id="title" name="title" required>
+
+      <label for="description">간단한 설명</label>
+      <input type="text" id="description" name="description" required>
+
+      <label for="contents">내용</label>
+      <textarea id="contents" name="contents" required></textarea>
+
+      <input type="submit" value="글쓰기">
+    </form>
+  </main>
+</body>
+</html>

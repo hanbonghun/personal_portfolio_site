@@ -13,7 +13,7 @@ const createMember = async (memberData) => {
 passport.use(new LocalStrategy({
   usernameField: 'email',
   passwordField: 'password'
-}, async (email, password,done,next) => {
+}, async (email, password, done, next) => {
   try {
     const user = await Member.getMemberByEmail(email);
     if (!user) {
@@ -27,34 +27,34 @@ passport.use(new LocalStrategy({
     }
     return done(null, user);  // serializeUser 함수로 user 정보를 넘김
   } catch (err) {
-     done(err);
+    done(err);
   }
 }));
 
-  passport.serializeUser((user, done) => {
-    done(null, user.id);  //db에서 추출한id값을 session id로 저장 
-  });
-  
-  passport.deserializeUser(async (id, done) => {
-    try {
-      const user = await Member.getMemberById(id);
-      return done(null, user);
-    } catch (err) {
-      return done(err);
-    }
-  });
-  
-  const login = passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/member/login',
-    failureFlash: true
-  });
+passport.serializeUser((user, done) => {
+  done(null, user.id);  //db에서 추출한id값을 session id로 저장 
+});
 
-  const logout = (req,res)=>{
-    req.session.destroy(() => {
-      res.redirect('/');
-    });
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await Member.getMemberById(id);
+    return done(null, user);
+  } catch (err) {
+    return done(err);
   }
+});
+
+const login = passport.authenticate('local', {
+  successRedirect: '/',
+  failureRedirect: '/member/login',
+  failureFlash: true
+});
+
+const logout = (req, res) => {
+  req.session.destroy(() => {
+    res.redirect('/');
+  });
+}
 //db를 조회한 결과를 바탕으로 처리하므로 비동기 처리
 
 module.exports = {

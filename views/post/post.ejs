@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= post.title %></title>
+  </head>
+  <body>
+    <h1><%= post.title %></h1>
+    <p>작성자: <%= post.author %></p>
+
+    <% if (user && user.id === post.author) { %>
+      <a href="/post/<%= post.id %>/edit">수정</a>
+    <% } %>
+
+    <p><%= post.contents %></p>
+
+  </body>
+</html>

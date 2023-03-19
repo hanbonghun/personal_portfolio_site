@@ -9,7 +9,40 @@ router.get("/", async (req,res)=>{
     res.render("post/postlist", { postlist: postlist });
 });
 // // 글쓰기 화면
-// router.get("/new", authMiddleware, postService.getNewArticle);
+router.get("/new", (req,res)=>res.render("post/new"));
+
+// 글 쓰기 
+router.post("/new", (req,res)=> {
+    const newPost = {
+      title: req.body.title,
+      description: req.body.description,
+      contents: req.body.contents,
+      author: req.user.id // 현재 로그인한 사용자의 ID를 가져와서 글쓴이(author)로 설정
+    };
+
+
+    // HTTP 요청은 일반적으로 문자열 형태로 전송되므로, 객체를 문자열로 변환해주어야 한다.
+     postService.createNewPost(newPost)
+    .then((post) => {
+      console.log("dfdf"+post);
+      res.redirect(`/post/${post._id}`);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("글쓰기를 실패했습니다.");
+    });
+});
+
+router.get("/:id", async (req, res, next) => {
+    try {
+        const post = await postService.getPostById(req.params.id);
+        res.render("post/post", { post: post, user:req.user });
+      } catch (err) {
+        console.error(err);
+        res.status(500).send("글을 불러오는데 실패했습니다.");
+      }
+  });
+  
 
 // router.put("/edit/:id", authMiddleware, postService.getEditArticle);
 

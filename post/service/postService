@@ -1,9 +1,23 @@
 var Post = require("../model/Post");
 
 // 글 전체 목록 
-const showPostList = async function (req,res){
-    var postlist = await Post.find().sort({ create_at: "desc" }); //db에 있는 모든 article을 articles변수에 저장
+exports.showPostList = async (req,res) => {
+    var postlist = await Post.find().sort({ createAt: "desc" }); //db에 있는 모든 article을 articles변수에 저장
     return postlist; 
 }
 
-module.exports = {showPostList};
+exports.createNewPost = async (post) => {
+    const newPost = new Post({
+        title: post.title,
+        description: post.description,
+        contents: post.contents,
+        author: post.author
+      });
+    await newPost.save();
+    return newPost;
+  };
+
+exports.getPostById = async (_id)=>{
+    const post = await Post.findById(_id);
+    return post;
+}
