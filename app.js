@@ -31,7 +31,7 @@ app.set("view engine", "ejs");
 app.use("/post", postRouter);
 app.use("/member",memberRouter); 
 
-const PORT = 3000; // 포트 번호
+const PORT = process.env.PORT; // 포트 번호
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
@@ -50,5 +50,7 @@ mongoose
 
 
 app.get('/', (req,res)=>{
-    res.render('index');
+    res.render('index',{
+      user: req.user
+    });
 })

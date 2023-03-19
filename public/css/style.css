@@ -1,4 +1,32 @@
-body {
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: right;
+}
+
+nav li {
+  display: inline-block;
+  margin-left: 20px;
+  font-size: 18px;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* body {
   background: #eee;
   margin-bottom: 0px;
   font-family: sans-serif;
@@ -61,4 +89,4 @@ html {
 
 iframe {
   width: 100%;
-}
+} */

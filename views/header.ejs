@@ -1,0 +1,14 @@
+<header>
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <% if (!user) { %>
+          <li><a href="/member/login">Login</a></li>
+          <li><a href="/member/signup">Sign up</a></li>
+        <% } else { %>
+          <li><%= user.name %>님</li>
+          <li><a href="/member/logout">Logout</a></li>
+        <% } %>
+      </ul>
+    </nav>
+  </header>

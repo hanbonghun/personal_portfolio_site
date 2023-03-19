@@ -50,9 +50,15 @@ passport.use(new LocalStrategy({
     failureFlash: true
   });
 
+  const logout = (req,res)=>{
+    req.session.destroy(() => {
+      res.redirect('/');
+    });
+  }
 //db를 조회한 결과를 바탕으로 처리하므로 비동기 처리
 
 module.exports = {
   createMember,
-  login 
+  login,
+  logout
 };
