@@ -1,0 +1,9 @@
+const mongoose = require('mongoose');
+var Post = require("../model/Member");
+
+exports.createMember = async (memberData) => {
+  const { username, email, password } = memberData;
+  const member = new Member({ username, email, password });
+  await member.save();
+  return member;
+};
