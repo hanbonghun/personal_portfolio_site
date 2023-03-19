@@ -65,8 +65,7 @@ app.get("/", async function (req, res) {
 
   axios
     .get(
-      "http://api.openweathermap.org/data/2.5/weather?lat=37.3578631&lon=126.9395806&appid=" +
-        process.env.OPENWEATHER_API_KEY
+      "https://api.openweathermap.org/data/2.5/weather?q=uiwang&appid="+process.env.OPENWEATHER_API_KEY+"&units=metric"
     )
     .then(async function (response) {
       await insert_info(my_weather, response);
