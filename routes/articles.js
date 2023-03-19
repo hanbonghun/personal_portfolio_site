@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var bodyParser = require("body-parser");
-var Article = require("./../models/article");
+var Article = require("../post/model/Post");
 const { render } = require("ejs");
 var app = express();
 

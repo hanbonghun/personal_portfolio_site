@@ -1,0 +1,8 @@
+var Post = require("../model/Post");
+
+const showArticleList = async function (req,res){
+    var postlist = await Post.find().sort({ create_at: "desc" }); //db에 있는 모든 article을 articles변수에 저장
+    res.render("post/postlist", { postlist: postlist });
+}
+
+module.exports = {showArticleList};

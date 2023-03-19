@@ -4,7 +4,7 @@ var bodyParser = require("body-parser");
 var app = express();
 const passport = require("passport");
 var session = require("express-session");
-var Article = require("./../models/article");
+var Article = require("../post/model/Post");
 
 router.get("/kakao", passport.authenticate("kakao"));
 
