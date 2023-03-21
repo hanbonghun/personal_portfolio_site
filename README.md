@@ -54,18 +54,17 @@ node index.js
 
 Home page 
 
-![캡처](/uploads/041cd7240e4947bc319727b499e7a477/캡처.PNG)
+![캡처_2023_03_22_00_20_58_915](https://user-images.githubusercontent.com/33712528/226654276-62245a62-f8ee-40aa-b112-4751a86e84cd.png)
 
 
-article 
+article (When login is successful, the administrator can write, edit, and delete posts.)
 
-![캡처](/uploads/b7a59c0818f5d3e7f1c4779a059e86d9/캡처.PNG)
-
-When login is successful, the administrator can write, edit, and delete posts.
-![캡처](/uploads/3bfe82bd033ffaa96002b32d9f405f11/캡처.PNG)
+![캡처_2023_03_22_00_22_12_61](https://user-images.githubusercontent.com/33712528/226654399-27816c61-e2c7-46f2-a56c-c25ae47bc149.png)
 
 posts
-![캡처](/uploads/893447e823a014353dfb5529ce0840de/캡처.PNG)
+![캡처_2023_03_22_00_25_06_374](https://user-images.githubusercontent.com/33712528/226655022-b3865859-23fa-4dac-a88e-027f2ffb7793.png)
 
+about
+![캡처_2023_03_22_00_25_03_963](https://user-images.githubusercontent.com/33712528/226655000-8cc8e8ab-7265-47aa-8a52-6071aa3d6fd4.png)
 
 
